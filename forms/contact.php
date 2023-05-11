@@ -1,24 +1,25 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  // Get the form fields and sanitize input
-  $name = filter_var(trim($_POST['name']), FILTER_SANITIZE_STRING);
+  // Get the form fields and remove whitespace
+  $name = strip_tags(trim($_POST['name']));
+  $name = str_replace(array("\r","\n"),array(" "," "),$name);
   $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
-  $subject = filter_var(trim($_POST['subject']), FILTER_SANITIZE_STRING);
-  $message = filter_var(trim($_POST['message']), FILTER_SANITIZE_STRING);
+  $subject = trim($_POST['subject']);
+  $message = trim($_POST['message']);
 
-  // Validate input
-  if ( empty($name) || empty($message) || empty($subject) || empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+  // Check that data was sent to the mailer
+  if ( empty($name) || empty($message) || empty($subject) || empty($email)) {
     // Set a 400 (bad request) response code and exit
     http_response_code(400);
-    echo 'Please fill out all fields correctly.';
+    echo 'Please fill out all fields.';
     exit;
   }
 
   // Set the recipient email address
-  $recipient = gaurabpandey03@gmail.com';
+  $recipient = 'gaurabpandey03@gmail.com';
 
   // Set the email subject
-  $email_subject = "New cweb response from $name";
+  $email_subject = "New contact form submission from $name";
 
   // Build the email content
   $email_content = "Name: $name\n";
@@ -27,10 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $email_content .= "Message:\n$message\n";
 
   // Build the email headers
-  $email_headers = "From: $name <$email>\r\n";
-  $email_headers .= "Reply-To: $email\r\n";
-  $email_headers .= "Content-Type: text/plain; charset=utf-8\r\n";
-  $email_headers .= "X-Mailer: PHP/" . phpversion();
+  $email_headers = "From: $name <$email>";
 
   // Send the email
   if (mail($recipient, $email_subject, $email_content, $email_headers)) {
@@ -48,3 +46,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   http_response_code(403);
   echo 'There was a problem with your submission, please try again.';
 }
+?>
