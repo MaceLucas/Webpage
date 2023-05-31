@@ -7,11 +7,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $subject = trim($_POST['subject']);
   $message = trim($_POST['message']);
 
-  // Check that data was sent to the mailer
-  if ( empty($name) || empty($message) || empty($subject) || empty($email)) {
-    // Set a 400 (bad request) response code and exit
+  // Server-side validation
+  if (empty($name) || empty($email) || empty($subject) || empty($message)) {
     http_response_code(400);
     echo 'Please fill out all fields.';
+    exit;
+  }
+
+  // Validate email format
+  if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    http_response_code(400);
+    echo 'Please enter a valid email address.';
     exit;
   }
 
@@ -32,15 +38,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   // Send the email
   if (mail($recipient, $email_subject, $email_content, $email_headers)) {
-    // Set a 200 (okay) response code
     http_response_code(200);
-    echo 'Thank You! Your message has been sent.';
+    echo 'Thank you! Your message has been sent.';
   } else {
-    // Set a 500 (internal server error) response code
     http_response_code(500);
     echo 'Oops! Something went wrong and we couldn\'t send your message.';
   }
-
 } else {
   // Not a POST request, set a 403 (forbidden) response code
   http_response_code(403);
