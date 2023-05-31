@@ -383,58 +383,6 @@ If you're looking for a reliable and skilled web developer for your next project
 
           </div>
 
-          <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-<form method="post" action="/forms/contact.php" onsubmit="return validateForm();">
-  <label for="name">Name:</label>
-  <input type="text" id="name" name="name" required>
-  
-  <label for="email">Email:</label>
-  <input type="email" id="email" name="email" required>
-  
-  <label for="subject">Subject:</label>
-  <input type="text" id="subject" name="subject" required>
-  
-  <label for="message">Message:</label>
-  <textarea id="message" name="message" required></textarea>
-  
-  <input type="submit" value="Submit">
-</form>
-
-<script>
-  function validateForm() {
-    var name = document.getElementById("name").value;
-    var email = document.getElementById("email").value;
-    var subject = document.getElementById("subject").value;
-    var message = document.getElementById("message").value;
-
-    if (name === "" || email === "" || subject === "" || message === "") {
-      alert("Please fill in all required fields.");
-      return false;
-    }
-
-    if (!validateEmail(email)) {
-      alert("Please enter a valid email address.");
-      return false;
-    }
-
-    return true;
-  }
-
-  function validateEmail(email) {
-    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  }
-</script>
-
-          
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-    <!-- End Contact Section -->
-
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
