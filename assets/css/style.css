@@ -630,13 +630,12 @@ section {
   z-index: 9999;
   background: #040b14;
 }
-
-#footer .copyright {
+ .copyright {
    font-size: 13px;
   padding-left: 250px;
 }
 
-#footer .credits {
+.credits {
   padding-top: 250px;
   font-size: 13px;
   color: #eaebf0;
