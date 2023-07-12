@@ -632,13 +632,12 @@ section {
 }
 
 #footer .copyright {
-  text-align: center;
-  padding-left: 50px;
+   font-size: 13px;
+  padding-left: 250px;
 }
 
 #footer .credits {
-  padding-top: 50px;
-  text-align: center;
+  padding-top: 250px;
   font-size: 13px;
   color: #eaebf0;
 }
