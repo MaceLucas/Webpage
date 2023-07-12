@@ -633,10 +633,11 @@ section {
 
 #footer .copyright {
   text-align: center;
+  padding-left: 50px;
 }
 
 #footer .credits {
-  padding-top: 5px;
+  padding-top: 50px;
   text-align: center;
   font-size: 13px;
   color: #eaebf0;
